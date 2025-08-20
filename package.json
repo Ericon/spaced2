@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "pnpm run build && wrangler pages dev ./dist",
     "deploy": "pnpm run build && wrangler pages deploy ./dist --project-name spaced2",
+    "deploy:bolt": "npm run build",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/telescope.svg"
   },
   "dependencies": {

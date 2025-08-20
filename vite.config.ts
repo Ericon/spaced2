@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     VitePWA({
@@ -55,6 +55,7 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
+    outDir: 'dist',
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -65,9 +66,11 @@ export default defineConfig({
       },
     },
   },
+  // 为 Bolt.new 部署优化
+  base: mode === 'production' ? '/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
-});
+}));
