@@ -1,5 +1,6 @@
 import SyncEngine from '@/lib/sync/engine';
 import { setClientId, setSessionExpiry } from '@/lib/sync/meta';
+import { config } from '@/lib/config';
 
 const SESSION_DURATION_MS = 1000 * 60 * 60 * 24 * 30 - 1000 * 60; // 30 days with leeway
 
@@ -21,7 +22,7 @@ export async function login(
   password: string
 ): Promise<LoginResponse> {
   const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+    `${config.backendUrl}/auth/login`,
     {
       method: 'POST',
       headers: {
@@ -72,7 +73,7 @@ export async function register(
   password: string
 ): Promise<RegisterResponse> {
   const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/auth/register`,
+    `${config.backendUrl}/auth/register`,
     {
       method: 'POST',
       headers: {
@@ -117,7 +118,7 @@ export async function verifyOtp(
   pin: string
 ): Promise<VerifyOtpResponse> {
   const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/auth/verify`,
+    `${config.backendUrl}/auth/verify`,
     {
       method: 'POST',
       headers: {
@@ -156,7 +157,7 @@ type RegisterClientResponse = {
 
 export async function registerClient(): Promise<RegisterClientResponse> {
   const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/auth/clientId`,
+    `${config.backendUrl}/auth/clientId`,
     {
       method: 'POST',
       credentials: 'include',
@@ -200,7 +201,7 @@ type LogoutResponse = {
 
 export async function logout(): Promise<LogoutResponse> {
   const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/auth/logout`,
+    `${config.backendUrl}/auth/logout`,
     {
       method: 'POST',
       credentials: 'include',
